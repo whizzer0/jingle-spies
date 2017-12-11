@@ -1,2 +1,2 @@
 # jingle-spies
-A CS project that isn't actually useful.
+A Computer Science project to create a film recommendation system.
