@@ -1,6 +1,6 @@
 import configparser
 
-def databaseStoreAccount(d):
+def databaseAccountsUpdate(d):
     db = configparser.ConfigParser()
     db.read('accounts.ini')
     films = ','.join(['0' for i in range(10)])
@@ -13,10 +13,15 @@ def databaseStoreAccount(d):
     with open('accounts.ini', 'ab') as dbFile:
         db.write(dbFile)
 
-def databaseStoreFilm(d):
+def databaseFilmsUpdate(d):
     db = configparser.ConfigParser()
     db.read('films.ini')
     db[d['id']] = {'Title':d['title'],
                    'Genres':d['genres']}
     with open('films.ini', 'ab') as dbFile:
         db.write(dbFile)
+        
+def databaseRecall(account, database = 'accounts.ini'):
+    db = configparser.ConfigParser
+    db.read(database)
+    return db[account]
