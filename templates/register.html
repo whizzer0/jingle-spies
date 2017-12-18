@@ -1,21 +1,21 @@
 <html>
     <head>
-        <title>Registration | Olflix</title>
+        <title>Registration</title>
     </head>
     <body>
         <form action="/register-success" method="POST">
             Name: <input type="text" name="name" id="name"><br />
-            Postcode: <input type="text" name="postcode" id="postcode"><br />
-            Date of birth: <input type="date" name="birthdate" id="birthdate"><br />
-            Gender: <select name="gender" id="gender">
+            Postcode: <input type="text" name="home" id="home"><br />
+            Date of birth: <input type="date" name="dob" id="dob"><br />
+            Gender: <select name="sex" id="sex">
                         <option value="male">Male</option>
                         <option value="female">Female</option>
                         <option value="other">Other</option>
                     </select><br />
             Preferred genre(s):<br />
-            <input type="checkbox" name="genre-action" id="genre-action"> Action<br />
-            <input type="checkbox" name="genre-action" id="genre-comedy"> Comedy<br />
-            <input type="checkbox" name="genre-action" id="genre-romance"> Romance<br />
+            <input type="checkbox" name="genre1" id="genre1"> Action<br />
+            <input type="checkbox" name="genre2" id="genre2"> Comedy<br />
+            <input type="checkbox" name="genre2" id="genre3"> Romance<br />
             <input type="submit" value="Register">
         </form>
     </body>
