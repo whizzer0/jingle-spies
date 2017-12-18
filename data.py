@@ -1,3 +1,5 @@
+#These functions access and modify the database of accounts and films.
+
 import configparser
 
 def databaseAccountsUpdate(d):

@@ -1,4 +1,4 @@
-#Account creation
+#Assorted functions to do with the registration process.
 
 from data import *
 
@@ -15,3 +15,6 @@ def selectedGenres(userData):
         else:
             genres[key] = ''
     return genres
+
+def validationPassword(password):
+    return any(char.isdigit() or char.isupper() for char in password)
