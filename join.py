@@ -1,6 +1,8 @@
 #Assorted functions to do with the registration process.
 
-from data import *
+TOTALGENRES = 3
+
+import data
 
 def selectedGender(userData):
     o = {'male':'', 'female':'', 'other':''}
@@ -18,3 +20,15 @@ def selectedGenres(userData):
 
 def validationPassword(password):
     return any(char.isdigit() or char.isupper() for char in password)
+
+def userAdd(userData):
+    d = {'uname':userData['uname'],
+        'password':userData['password'],
+        'name':"{0} {1}".format(userData['fname'], userData['lname']),
+        'postcode':userData['postcode'],
+        'birthdate':userData['birthdate'],
+        'gender':userData['gender'],
+        'genres':{}}
+    for i in range(1, TOTALGENRES + 1):
+        d['genres']['genre' + str(i)] = True if (userData['genre' + str(i)] == 'checked') else False
+    return data.databaseAccountsUpdate(d)

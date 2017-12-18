@@ -29,7 +29,7 @@ def pagePostRegister():
     userData.update(join.selectedGender(userData))
     userData.update(join.selectedGenres(userData))
     if join.validationPassword(userData['password']):
-        #join.userAdd(userData)
+        join.userAdd(userData)
         return render_template('register-success.html', userData=userData)
     else:
         return render_template('register.html', userData=userData, error=True)
