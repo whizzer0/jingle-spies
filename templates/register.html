@@ -3,19 +3,27 @@
         <title>Registration</title>
     </head>
     <body>
-        <form action="/register-success" method="POST">
-            Name: <input type="text" name="name" id="name"><br />
-            Postcode: <input type="text" name="home" id="home"><br />
-            Date of birth: <input type="date" name="dob" id="dob"><br />
-            Gender: <select name="sex" id="sex">
-                        <option value="male">Male</option>
-                        <option value="female">Female</option>
-                        <option value="other">Other</option>
+        <form action="/register" method="POST">
+            Username: <input type="text" name="uname" id="uname" value="{{userData['uname']}}"><br />
+            Password: <input type="password" name="password" id="password"><br />
+            {% if error %}
+                <i><b>Your password must contain at least one number and one capital letter.</b> Please don't use a password you use elsewhere as our system is horrendously insecure.</i><br /><br />
+            {% else %}
+                <i>Your password must contain at least one number and one capital letter. Please don't use a password you use elsewhere as our system is horrendously insecure.</i><br /><br />
+            {% endif %}
+            First name: <input type="text" name="fname" id="fname" value="{{userData['fname']}}"><br />
+            Last name: <input type="text" name="lname" id="lname" value="{{userData['lname']}}"><br />
+            Postcode: <input type="text" name="postcode" id="postcode" value="{{userData['postcode']}}"><br />
+            Date of birth: <input type="date" name="birthdate" id="birthdate" value="{{userData['birthdate']}}"><br />
+            Gender: <select name="gender" id="gender" selected="{{userData['gender']}}">
+                        <option value="male" {{userData['male']}}>Male</option>
+                        <option value="female" {{userData['female']}}>Female</option>
+                        <option value="other" {{userData['other']}}>Other</option>
                     </select><br />
             Preferred genre(s):<br />
-            <input type="checkbox" name="genre1" id="genre1"> Action<br />
-            <input type="checkbox" name="genre2" id="genre2"> Comedy<br />
-            <input type="checkbox" name="genre2" id="genre3"> Romance<br />
+            <input type="checkbox" name="genre1" id="genre1" {{userData['genre1']}}> Action<br />
+            <input type="checkbox" name="genre2" id="genre2" {{userData['genre2']}}> Comedy<br />
+            <input type="checkbox" name="genre3" id="genre3" {{userData['genre3']}}> Romance<br />
             <input type="submit" value="Register">
         </form>
     </body>
