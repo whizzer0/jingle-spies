@@ -19,7 +19,7 @@ def selectedGenres(userData):
     return genres
 
 def validationPassword(password):
-    return any(char.isdigit() and char.isupper() for char in password)
+    return any(char.isdigit() for char in password) and any(char.isupper() for char in password)
 
 def userAdd(userData):
     d = {'uname':userData['uname'],
