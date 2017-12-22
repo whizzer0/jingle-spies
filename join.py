@@ -31,4 +31,4 @@ def userAdd(userData):
         'genres':{}}
     for i in range(1, TOTALGENRES + 1):
         d['genres']['genre' + str(i)] = True if (userData['genre' + str(i)] == 'checked') else False
-    return data.databaseAccountsUpdate(d)
+    return data.accountsUpdate(d)

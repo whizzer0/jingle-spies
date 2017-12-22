@@ -2,7 +2,7 @@
 
 import configparser
 
-def databaseAccountsUpdate(d):
+def accountsUpdate(d):
     db = configparser.ConfigParser()
     db.read('accounts.ini')
     films = ','.join(['Default' for i in range(10)])
@@ -21,7 +21,7 @@ def databaseAccountsUpdate(d):
         db.write(dbFile)
     return d['uname']
 
-def databaseFilmsUpdate(d):
+def filmsUpdate(d):
     db = configparser.ConfigParser()
     db.read('films.ini')
     db[d['id']] = {'Title':d['title'],
@@ -29,7 +29,12 @@ def databaseFilmsUpdate(d):
     with open('films.ini', 'a') as dbFile:
         db.write(dbFile)
         
-def databaseRecall(account, database = 'accounts.ini'):
+def accountsRecall(account):
     db = configparser.ConfigParser
-    db.read(database)
+    db.read('accounts.ini')
     return db[account]
+    
+def filmsRecall():
+    db = configparser.ConfigParser
+    db.read('films.ini')
+    return db

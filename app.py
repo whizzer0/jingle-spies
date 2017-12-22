@@ -33,6 +33,10 @@ def pagePostRegister():
         return render_template('register-success.html', userData=userData)
     else:
         return render_template('register.html', userData=userData, error=True)
-	
+
+@app.route('/home', methods=['GET'])
+def pageGetHome():
+    return render_template('home.html')
+
 if __name__ == '__main__':
 	app.run()
