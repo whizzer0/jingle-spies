@@ -30,11 +30,11 @@ def filmsUpdate(d):
         db.write(dbFile)
         
 def accountsRecall(account):
-    db = configparser.ConfigParser
+    db = configparser.ConfigParser()
     db.read('accounts.ini')
     return db[account]
     
 def filmsRecall():
-    db = configparser.ConfigParser
+    db = configparser.ConfigParser()
     db.read('films.ini')
     return db

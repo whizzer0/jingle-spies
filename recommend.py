@@ -6,7 +6,7 @@ def genreCount(user): #Determine how preferred each genre is for a particular us
     userData = data.accountsRecall(user) #Get this user's data from the database.
     films = data.filmsRecall() #Get the films database. A bad idea if there were lots of films, but fine for our 12.
     genrePoints = {'genre1':0, 'genre2':0, 'genre3':0} #Create the dict we'll use to assign points to genres. Flaw: not extensible.
-    for film in userData['lastviewed']: #Iterates over the last ten films viewed by the user.
+    for film in userData['lastviewed'].split(','): #Iterates over the last ten films viewed by the user.
         if film == 'Default':
             break #Don't waste time if we've already reached the "end" of the list.
         else:
@@ -19,7 +19,7 @@ def genreCount(user): #Determine how preferred each genre is for a particular us
 def filmSort(user, genrePoints): #Sort films based on the genre scoring.
     userData = data.accountsRecall(user)
     films = data.filmsRecall() #Get the list of films from the database.
-    genreSort = sorted(genrePoints, key=genrePoints.get).reverse() #Sort the genres based on their weightings. Greatest first.
+    genreSort = sorted(genrePoints, key=genrePoints.get)[::-1] #Sort the genres based on their weightings. Greatest first.
     filmsSort = []
     for genre in genreSort: #Iterate over the genres and films and add them in order of preferred genre.
         for film, i in films.items():
@@ -30,3 +30,10 @@ def filmSort(user, genrePoints): #Sort films based on the genre scoring.
             if genre in i['genres'] and not film in filmsSort and film in userData['lastviewed']:
                 filmsSort.append(film)
     return filmsSort
+
+def filmSelect(films, amount): #Shorten a list of films and include the rest of their data.
+    filmDb = data.filmsRecall()
+    filmsFinal = {}
+    for film in films[0:amount]:
+        filmsFinal[film] = filmDb[film]
+    return filmsFinal

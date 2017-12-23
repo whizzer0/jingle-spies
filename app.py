@@ -1,8 +1,9 @@
 #This is essentially the webserver backend - it serves pages that are requested by the user, and carries input between the pages.
 
 from flask import Flask, render_template, request
-import join
+import join, recommend
 
+user = 'DEFAULT'
 userDataBlank = {'uname':"",
                 'password':"",
                 'name':("", ""),
@@ -22,6 +23,7 @@ def pageGetRegister():
 
 @app.route('/register', methods=['POST'])
 def pagePostRegister():
+    global user
     userData = request.form.to_dict()
     userData['genre1'] = userData.get('genre1', False)
     userData['genre2'] = userData.get('genre2', False)
@@ -30,13 +32,18 @@ def pagePostRegister():
     userData.update(join.selectedGenres(userData))
     if join.validationPassword(userData['password']):
         join.userAdd(userData)
+        user = userData['uname']
         return render_template('register-success.html', userData=userData)
     else:
         return render_template('register.html', userData=userData, error=True)
 
 @app.route('/home', methods=['GET'])
 def pageGetHome():
-    return render_template('home.html')
+    filmsFive = recommend.filmSelect(recommend.filmSort(user, recommend.genreCount(user)), 5)
+    filmTitles = []
+    for filmTitle, film in filmsFive.items():
+        filmTitles.append(film['title'])
+    return render_template('home.html', films=filmsFive, filmTitles=filmTitles)
 
 if __name__ == '__main__':
 	app.run()

@@ -4,5 +4,13 @@
     </head>
     <body>
         <h1>We recommend these films to you:</h1>
+        
+        <ul>
+            {% for film in filmTitles %}
+                
+                <li>{{film}}</li>
+                
+            {% endfor %}
+        </ul>
     </body>
 </html>
