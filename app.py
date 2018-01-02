@@ -3,7 +3,7 @@
 from flask import Flask, render_template, request
 import join, recommend
 
-user = 'DEFAULT'
+user = 'whizzer0'
 userDataBlank = {'uname':"",
                 'password':"",
                 'name':("", ""),
@@ -41,9 +41,11 @@ def pagePostRegister():
 def pageGetHome():
     filmsFive = recommend.filmSelect(recommend.filmSort(user, recommend.genreCount(user)), 5)
     filmTitles = []
+    filmIDs = []
     for filmTitle, film in filmsFive.items():
         filmTitles.append(film['title'])
-    return render_template('home.html', films=filmsFive, filmTitles=filmTitles)
+        filmIDs.append(str(film)[10:-1])
+    return render_template('home.html', films=filmsFive, filmTitles=filmTitles, filmIDs=filmIDs)
 
 if __name__ == '__main__':
 	app.run()

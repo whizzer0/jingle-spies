@@ -6,9 +6,15 @@
         <h1>We recommend these films to you:</h1>
         
         <ul>
-            {% for film in filmTitles %}
+            {% for i in range(5) %}
                 
-                <li>{{film}}</li>
+                <li>{{filmTitles[i]}}</li>
+                <form action="/home" method="POST" name="{{filmIDs[i]}}_watch">
+                    <input type="submit" value="Watch">
+                </form>
+                <form action="/home" method="POST" name="{{filmIDs[i]}}_like">
+                    <input type="submit" value="Like">
+                </form>
                 
             {% endfor %}
         </ul>
