@@ -2,10 +2,9 @@
 
 import configparser
 
-def accountsUpdate(d):
+def accountsUpdate(d, films = ','.join(['DEFAULT' for i in range(10)])):
     db = configparser.ConfigParser()
     db.read('accounts.ini')
-    films = ','.join(['Default' for i in range(10)])
     genres = []
     for genre, value in d['genres'].items():
         if value:
@@ -15,7 +14,7 @@ def accountsUpdate(d):
                      'Postcode':d['postcode'],
                      'Birthdate':d['birthdate'],
                      'Gender':d['gender'],
-                     'SelectedGenres':','.join(genres),
+                     'Genres':','.join(genres),
                      'LastViewed':films}
     with open('accounts.ini', 'a') as dbFile:
         db.write(dbFile)
@@ -29,10 +28,13 @@ def filmsUpdate(d):
     with open('films.ini', 'a') as dbFile:
         db.write(dbFile)
         
-def accountsRecall(account):
+def accountsRecall(account = 'DEFAULT'):
     db = configparser.ConfigParser()
     db.read('accounts.ini')
-    return db[account]
+    if account == 'DEFAULT':
+        return db
+    else:
+        return db[account]
     
 def filmsRecall():
     db = configparser.ConfigParser()
