@@ -56,7 +56,6 @@ def pagePostHome():
     button = request.form.to_dict()
     b = list(button.keys())[0]
     if b[-6:] == '_watch':
-        print(button)
         u = data.accountsRecall(user)
         films = u['lastviewed'].split(',')
         filmsFinal = list(films)
@@ -68,7 +67,7 @@ def pagePostHome():
                 filmsFinal[0] = b[:-6]
                 break
         filmsFinal = ','.join(filmsFinal)
-        print(u)
+        u['uname'] = user
         data.accountsUpdate(u, filmsFinal)
     filmVars = recommendDisplayable()
     return render_template('home-post.html', films=filmVars['filmsFive'], filmTitles=filmVars['filmTitles'], filmIDs=filmVars['filmIDs'])

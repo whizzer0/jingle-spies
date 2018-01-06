@@ -28,7 +28,12 @@ def userAdd(userData):
         'postcode':userData['postcode'],
         'birthdate':userData['birthdate'],
         'gender':userData['gender'],
-        'genres':{}}
+        'genres':''}
+    genres = []
     for i in range(1, TOTALGENRES + 1):
-        d['genres']['genre' + str(i)] = True if (userData['genre' + str(i)] == 'checked') else False
+        g = 'genre' + str(i)
+        if userData[g] == 'checked':
+            genres.append(g)
+        #d['genres']['genre' + str(i)] = True if (userData['genre' + str(i)] == 'checked') else False
+    d['genres'] = ','.join(genres)
     return data.accountsUpdate(d)
